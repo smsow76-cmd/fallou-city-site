@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Slider -->
+ <section class="container my-5">
+    <form method="GET" action="{% url 'proprietes' %}">
+        <div class="row g-2">
+
+            <div class="col-md-4">
+                <input type="text" name="q" class="form-control" placeholder="Ville ou titre...">
+            </div>
+
+            <div class="col-md-3">
+                <input type="number" name="prix" class="form-control" placeholder="Prix max">
+            </div>
+
+            <div class="col-md-3">
+                <select name="type" class="form-control">
+                    <option value="">Type</option>
+                    <option>Villa</option>
+                    <option>Appartement</option>
+                    <option>Terrain</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">Rechercher</button>
+            </div>
+
+        </div>
+    </form>
+</section>
+<section id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for i in "1234"|make_list %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <img src="{% static 'images/house' %}{{ i }}.jpeg" class="d-block w-100" style="height:90vh; object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h1 class="fw-bold">Maison {{ i }}</h1>
+        <p>Découvrez nos biens de rêve</p>
+        <a href="{% url 'proprietes' %}" class="btn btn-primary btn-lg">Voir les propriétés</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</section>
+
+<!-- Nos biens -->
+<section class="container my-5">
+  <h2 class="text-center mb-4">Nos biens phares</h2>
+  <div class="row g-4">
+    {% for bien in biens %}
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="{% static 'images/' %}{{ bien.image }}" class="card-img-top">
+        <div class="card-body">
+          <h5>{{ bien.titre }} <span class="badge bg-success">Vente</span></h5>
+          <p>{{ bien.prix }} • {{ bien.details }}</p>
+          <a href="{% url 'proprietes' %}" class="btn btn-outline-primary btn-sm">Détails</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Nos services -->
+<section class="bg-light text-center">
+  <div class="container">
+    <h2 class="mb-4">Nos services</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <i class="bi bi-house-door-fill service-icon"></i>
+        <h5>Achat</h5>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-cash-stack service-icon"></i>
+        <h5>Vente</h5>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-building service-icon"></i>
+        <h5>Location</h5>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pourquoi nous choisir -->
+<section class="container text-center my-5">
+  <h2>Pourquoi nous choisir ?</h2>
+  <div class="row g-4 mt-4">
+    <div class="col-md-4">
+      <i class="bi bi-shield-check service-icon"></i>
+      <p>Fiabilité et sécurité dans toutes vos transactions</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-people service-icon"></i>
+      <p>Équipe professionnelle et disponible</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-star service-icon"></i>
+      <p>Plus de 100 clients satisfaits</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOS PROJETS RÉCENTS -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Nos projets récents</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="{% static 'images/house1.jpeg' %}" class="card-img-top" alt="Projet 1">
+          <div class="card-body">
+            <h5>Villa Liberté</h5>
+            <p>Vendu récemment • 6 chambres • Jardin et piscine</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="{% static 'images/house2.jpeg' %}" class="card-img-top" alt="Projet 2">
+          <div class="card-body">
+            <h5>Appartement Plateau</h5>
+            <p>Loué • 3 chambres • Terrasse moderne</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="{% static 'images/house3.jpeg' %}" class="card-img-top" alt="Projet 3">
+          <div class="card-body">
+            <h5>Maison Familiale</h5>
+            <p>Vendu • 4 chambres • Garage et jardin</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
